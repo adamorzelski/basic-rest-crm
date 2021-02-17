@@ -1,7 +1,7 @@
 package com.example.basic_crm.controller;
 
 import com.example.basic_crm.model.Customer;
-import com.example.basic_crm.service.CustomerService;
+import com.example.basic_crm.service.domain.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

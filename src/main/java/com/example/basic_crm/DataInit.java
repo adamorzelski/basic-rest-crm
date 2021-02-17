@@ -1,8 +1,11 @@
 package com.example.basic_crm;
 
 import com.example.basic_crm.model.Customer;
-import com.example.basic_crm.service.CustomerService;
+import com.example.basic_crm.model.User;
+import com.example.basic_crm.repository.UserRepository;
+import com.example.basic_crm.service.domain.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -12,7 +15,7 @@ import java.util.List;
 public class DataInit {
 
     @Autowired
-    public DataInit(CustomerService customerService) {
+    public DataInit(CustomerService customerService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
         List<Customer> customers = Arrays.asList(
                 new Customer("John", "Doe", "john.doe@mail.com", "Main 1", "Lublin", "123456789"),
@@ -21,5 +24,9 @@ public class DataInit {
         );
 
         customerService.saveAll(customers);
+
+        User user = new User("user", passwordEncoder.encode("user"), "user");
+
+        userRepository.save(user);
     }
 }

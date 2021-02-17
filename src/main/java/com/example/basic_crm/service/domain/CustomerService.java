@@ -1,4 +1,4 @@
-package com.example.basic_crm.service;
+package com.example.basic_crm.service.domain;
 
 import com.example.basic_crm.model.Customer;
 import com.example.basic_crm.repository.CustomerRepository;
