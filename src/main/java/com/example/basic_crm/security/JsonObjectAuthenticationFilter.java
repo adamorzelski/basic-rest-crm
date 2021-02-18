@@ -1,7 +1,6 @@
 package com.example.basic_crm.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -16,7 +15,6 @@ public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticati
 
     private final ObjectMapper objectMapper;
 
-    @Autowired
     public JsonObjectAuthenticationFilter(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }

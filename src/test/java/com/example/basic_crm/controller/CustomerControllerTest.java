@@ -4,16 +4,16 @@ import com.example.basic_crm.model.Customer;
 import com.example.basic_crm.service.domain.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -29,8 +29,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(CustomerController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@WithMockUser
 class CustomerControllerTest {
 
     @Autowired
@@ -59,6 +60,18 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$[0].emailAddress", is("0test.email@mail.com")))
                 .andExpect(jsonPath("$[1].emailAddress", is("1test.email@mail.com")));
 
+    }
+
+    private List<Customer> getMockCustomers() {
+        List<Customer> mockCustomers = Arrays.asList(
+                new Customer("John", "Doe", "0test.email@mail.com", "Main 1", "Lublin", "123456789"),
+                new Customer("Adam", "Smith", "1test.email@mail.com", "Main 2", "Warszawa", "223456789")
+        );
+
+        mockCustomers.get(0).setId(1);
+        mockCustomers.get(1).setId(2);
+
+        return mockCustomers;
     }
 
     @Test
@@ -227,17 +240,4 @@ class CustomerControllerTest {
                 .andExpect(status().isOk());
     }
 
-
-
-    private List<Customer> getMockCustomers() {
-        List<Customer> mockCustomers = Arrays.asList(
-                new Customer("John", "Doe", "0test.email@mail.com", "Main 1", "Lublin", "123456789"),
-                new Customer("Adam", "Smith", "1test.email@mail.com", "Main 2", "Warszawa", "223456789")
-        );
-
-        mockCustomers.get(0).setId(1);
-        mockCustomers.get(1).setId(2);
-
-        return mockCustomers;
-    }
 }
