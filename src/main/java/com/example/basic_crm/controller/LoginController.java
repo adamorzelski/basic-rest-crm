@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     /**
-     * This endpoint provides a token in the response header
+     * This endpoint provides token in the response header
      */
     @PostMapping("/login")
     public void login(@RequestBody LoginCredentials credentials) {
