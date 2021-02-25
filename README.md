@@ -13,3 +13,4 @@ Technologies
 * JUnit
 * Mockito
 * Maven
+* Swagger
